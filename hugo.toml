@@ -1,4 +1,4 @@
-baseURL = "http://localhost:1313/"
+baseURL = "https://jolly-fenglisu-52771f.netlify.app/"
 locale = "en-us"
 title = "OhmChart"
 enableRobotsTXT = true
