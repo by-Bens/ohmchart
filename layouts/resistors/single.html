@@ -1,0 +1,67 @@
+{{ define "main" }}
+<div class="resistor-page">
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@type": "FAQPage",
+  "mainEntity": [
+    {
+      "@type": "Question",
+      "name": "What is the 4-band color code for a {{ .Params.resistance_label }} resistor?",
+      "acceptedAnswer": {
+        "@type": "Answer",
+        "text": "{{ .Params.band1 }}, {{ .Params.band2 }}, {{ .Params.multiplier }}, {{ .Params.tolerance }} — representing {{ .Params.resistance_label }} at {{ .Params.tolerance_pct }} tolerance."
+      }
+    }
+  ]
+}
+</script>
+<h1>{{ .Params.resistance_label }} Resistor Color Code</h1>
+
+<p>4-band color code, {{ .Params.tolerance_pct }} tolerance:</p>
+{{ $bandColors := slice .Params.band1 .Params.band2 .Params.multiplier .Params.tolerance }}
+{{ partial "resistor-svg.html" (dict "colors" $bandColors "hex" .Site.Data.colors) }}
+
+<table>
+  <tr>
+    <th>Band</th>
+    <th>Color</th>
+    <th>Meaning</th>
+  </tr>
+  <tr>
+    <td>1</td>
+    <td>{{ .Params.band1 }}</td>
+    <td>1st digit</td>
+  </tr>
+  <tr>
+    <td>2</td>
+    <td>{{ .Params.band2 }}</td>
+    <td>2nd digit</td>
+  </tr>
+  <tr>
+    <td>3</td>
+    <td>{{ .Params.multiplier }}</td>
+    <td>Multiplier</td>
+  </tr>
+  <tr>
+    <td>4</td>
+    <td>{{ .Params.tolerance }}</td>
+    <td>Tolerance {{ .Params.tolerance_pct }}</td>
+  </tr>
+</table>
+<nav>
+  {{ if .Params.prev_slug }}
+  <a href="{{ printf "/resistors/%s/" .Params.prev_slug | relURL }}">&larr; {{ .Params.prev_label }}</a>
+  {{ end }}
+  {{ if .Params.next_slug }}
+  <a href="{{ printf "/resistors/%s/" .Params.next_slug | relURL }}">{{ .Params.next_label }} &rarr;</a>
+  {{ end }}
+</nav>
+<p>New to this? Read <a href="{{ "/guide/how-to-read-resistor-color-codes/" | relURL }}">how to read resistor color codes</a>.</p>
+<h2>Frequently asked</h2>
+<details>
+  <summary>What is the 4-band color code for a {{ .Params.resistance_label }} resistor?</summary>
+  <p>{{ .Params.band1 }}, {{ .Params.band2 }}, {{ .Params.multiplier }}, {{ .Params.tolerance }} — representing {{ .Params.resistance_label }} at {{ .Params.tolerance_pct }} tolerance.</p>
+</details>
+</div>
+{{ end }}

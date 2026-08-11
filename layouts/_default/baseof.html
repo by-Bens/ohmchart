@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+    <html lang="en">
+    <head>
+        <meta charset="utf-8">
+        <meta name="viewport" content="width=device-width, initial-scale=1">
+        <title>{{ .Title }} | {{ .Site.Title }}</title>
+        {{ if .Params.resistance_label }}
+        <meta name="description" content="{{ .Params.resistance_label }} resistor color code: exact 4-band color bands and tolerance.">
+        {{ else }}
+        <meta name="description" content="{{ .Description | default .Site.Params.description }}">
+        {{ end }}
+        <link rel="stylesheet" href="{{ "css/style.css" | relURL }}">
+        <link rel="canonical" href="{{ .Permalink }}">
+    </head>
+    <body>
+    <header class="site-header">
+        <div class="wrap">
+            <a class="brand" href="{{ "/" | relURL }}">OhmChart</a>
+            <nav>
+            <a href="{{ "/resistors/" | relURL }}">Browse values</a>
+            <a href="{{ "/guide/how-to-read-resistor-color-codes/" | relURL }}">How to read codes</a>
+            </nav>
+        </div>
+    </header>
+    <main class="wrap">
+        {{ block "main" . }}{{ end }}
+    </main>
+
+    <footer class="wrap">
+        <p>&copy; {{ now.Year }} OhmChart</p>
+    </footer>
+    </body>
+</html>

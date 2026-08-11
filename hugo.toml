@@ -1,0 +1,7 @@
+baseURL = "http://localhost:1313/"
+locale = "en-us"
+title = "OhmChart"
+enableRobotsTXT = true
+
+[params]
+  description = "Look up the exact color code for any standard resistor value."

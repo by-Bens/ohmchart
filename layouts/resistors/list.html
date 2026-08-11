@@ -1,0 +1,18 @@
+{{ define "main" }}
+<h1>{{ .Title }}</h1>
+<p>{{ .Content }}</p>
+
+{{ range seq 0 6 }}
+{{ $decade := . }}
+{{ $group := where $.Pages "Params.decade_exp" "eq" $decade }}
+{{ if $group }}
+<h2>Decade: &times;10^{{ $decade }}</h2>
+<ul class="value-grid">
+  {{ range $group.ByParam "resistance_ohms" }}
+  <li><a href="{{ .Permalink }}">{{ .Params.resistance_label }}</a></li>
+  {{ end }}
+</ul>
+{{ end }}
+{{ end }}
+
+{{ end }}

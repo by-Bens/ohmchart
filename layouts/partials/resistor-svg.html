@@ -1,0 +1,16 @@
+{{ $colors := .colors }}
+{{ $hex := .hex }}
+{{ $n := len $colors }}
+{{ $bodyX := 40 }}
+{{ $bodyW := 240 }}
+{{ $bandW := 14 }}
+<svg viewBox="0 0 320 90" xmlns="http://www.w3.org/2000/svg">
+  <line x1="0" y1="45" x2="{{ $bodyX }}" y2="45" stroke="#888" stroke-width="4"/>
+  <line x1="{{ add $bodyX $bodyW }}" y1="45" x2="320" y2="45" stroke="#888" stroke-width="4"/>
+  <rect x="{{ $bodyX }}" y="24" width="{{ $bodyW }}" height="42" rx="18" fill="#E8D9B5" stroke="#B79A5E" stroke-width="2"/>
+  {{ $gap := div (sub $bodyW (mul $n $bandW)) (add $n 1) }}
+  {{ range $i, $c := $colors }}
+  {{ $x := add $bodyX (add $gap (mul $i (add $bandW $gap))) }}
+  <rect x="{{ $x }}" y="24" width="{{ $bandW }}" height="42" fill="{{ index $hex $c }}" stroke="#0002" stroke-width="1"/>
+  {{ end }}
+</svg>
